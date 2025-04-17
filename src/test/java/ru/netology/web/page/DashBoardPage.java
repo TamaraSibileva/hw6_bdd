@@ -23,12 +23,12 @@ public class DashBoardPage {
         header.should(Condition.visible);
     }
 
-    private SelenideElement getCard(DataHelper.CardInfo cardInfo) {
-        return cards.findBy(Condition.attribute("data-test-id", cardInfo.getTestId()));
+    private SelenideElement getCard(String cardNumber) {
+        return cards.findBy(Condition.text(cardNumber));
     }
 
-    public int getCardBalance(DataHelper.CardInfo cardInfo) {
-        var text = getCard(cardInfo).getText();
+    public int getCardBalance(String cardNumber) {
+        var text = getCard(cardNumber).getText();
         return extractBalance(text);
     }
 
@@ -39,8 +39,8 @@ public class DashBoardPage {
         return Integer.parseInt(value);
     }
 
-    public  TransferPage selectCardToTransfer(DataHelper.CardInfo cardInfo) {
-        getCard(cardInfo).$("button").click();
+    public  TransferPage selectCardToTransfer(String cardNumber) {
+        getCard(cardNumber).$("button").click();
         return new TransferPage();
     }
 
@@ -49,8 +49,8 @@ public class DashBoardPage {
         header.should(Condition.visible);
     }
 
-    public void checkCardBalance(DataHelper.CardInfo cardinfo, String expectedBalance) {
-        getCard(cardinfo).should(Condition.visible).should(Condition.text(balanceStartText + expectedBalance + balanceFinishText));
+    public void checkCardBalance(String cardNumber, String expectedBalance) {
+        getCard(cardNumber).should(Condition.visible).should(Condition.text(balanceStartText + expectedBalance + balanceFinishText));
     }
 }
 

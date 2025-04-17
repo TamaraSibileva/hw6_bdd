@@ -20,14 +20,14 @@ public class TransferPage {
         transferHeader.should(Condition.visible);
     }
 
-    public void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
+    public void makeTransfer(String amountToTransfer, String cardNumber) {
         amountInput.setValue(amountToTransfer);
-        fromInput.setValue(cardInfo.getCardNumber());
+        fromInput.setValue(cardNumber);
         transferButton.click();
     }
 
-    public DashBoardPage makeValidTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-        makeTransfer(amountToTransfer, cardInfo);
+    public DashBoardPage makeValidTransfer(String amountToTransfer, String cardNumber) {
+        makeTransfer(amountToTransfer, cardNumber);
         return new DashBoardPage();
     }
 
